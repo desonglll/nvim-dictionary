@@ -1,5 +1,5 @@
 -- lua/dictionary/init.lua
-local downloader = require("downloader")
+local downloader = require("dictionary.downloader")
 
 vim.api.nvim_create_user_command("DownloadEnglishWords", function()
 	downloader.download()
