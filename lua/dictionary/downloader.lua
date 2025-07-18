@@ -2,11 +2,40 @@
 local M = {}
 
 local words_url = "https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words.txt"
-local words_file = vim.fs.joinpath(vim.fn.stdpath("config"), "dictionary", "words.txt")
+local words_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "dictionary")
+local words_file = vim.fs.joinpath(words_dir, "words.txt")
 
 local function file_exists(path)
     local stat = vim.loop.fs_stat(path)
     return stat and stat.type == "file"
+end
+
+function M.setup(opts)
+    opts = opts or {}
+
+    local has_dir = type(opts.dir) == "string" and opts.dir ~= ""
+    local has_file = type(opts.file) == "string" and opts.file ~= ""
+
+    if has_dir and has_file then
+        words_dir = opts.dir
+        words_file = vim.fs.joinpath(words_dir, opts.file)
+    elseif has_file then
+        words_file = opts.file
+        words_dir = vim.fs.dirname(words_file)
+    elseif has_dir then
+        words_dir = opts.dir
+        words_file = vim.fs.joinpath(words_dir, "words.txt")
+    else
+        words_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "dictionary")
+        words_file = vim.fs.joinpath(words_dir, "words.txt")
+    end
+
+    print("📁 Dictionary dir:  " .. words_dir)
+    print("📄 Dictionary file: " .. words_file)
+end
+
+function M.get_words_dir()
+    return words_dir
 end
 
 function M.download()

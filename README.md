@@ -7,11 +7,11 @@ A simple Neovim plugin to download and sync a local English dictionary file.
 
 ```lua
 {
-  dir = "~/path/to/nvim-dictionary", -- update this to your actual path
-  name = "dictionary",
-  cmd = { "DownloadEnglishWords", "SyncEnglishWords" },
-  config = function()
-    require("dictionary")
-  end,
+    "desonglll/nvim-dictionary,"
+    name = "dictionary",
+    cmd = { "DownloadEnglishWords", "SyncEnglishWords" },
+    config = function()
+        require("dictionary")
+    end,
 }
 
