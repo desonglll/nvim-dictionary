@@ -2,7 +2,7 @@
 local M = {}
 
 local words_url = "https://raw.githubusercontent.com/dwyl/english-words/refs/heads/master/words.txt"
-local words_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "dictionary")
+local words_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "dictionary")
 local words_file = vim.fs.joinpath(words_dir, "words.txt")
 
 local function file_exists(path)
@@ -26,7 +26,7 @@ function M.setup(opts)
         words_dir = opts.dir
         words_file = vim.fs.joinpath(words_dir, "words.txt")
     else
-        words_dir = vim.fs.joinpath(vim.fn.stdpath("config"), "dictionary")
+        words_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "dictionary")
         words_file = vim.fs.joinpath(words_dir, "words.txt")
     end
 
